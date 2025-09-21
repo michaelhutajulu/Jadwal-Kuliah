@@ -1,0 +1,209 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #eaeaea;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Jam Digital */
+.clock {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px 40px;
+  border-radius: 16px;
+  border: 3px solid #ffd369;
+  box-shadow: 0 0 25px rgba(255, 211, 105, 0.5);
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+#digital-clock {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #ffd369;
+  letter-spacing: 3px;
+  text-shadow: 0 0 12px rgba(255, 211, 105, 0.8),
+               0 0 20px rgba(255, 211, 105, 0.6);
+}
+
+/* Card Kegiatan Aktif */
+.current-card {
+  background: rgba(15, 52, 96, 0.6);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 211, 105, 0.3);
+  margin-bottom: 30px;
+  text-align: center;
+  width: 80%;
+  max-width: 600px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.current-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 35px rgba(255, 211, 105, 0.6);
+}
+.current-card h2 {
+  margin: 0;
+  color: #ffd369;
+}
+
+/* Container Tabel Per Hari (horizontal scroll) */
+.schedule-container {
+  display: flex;              
+  flex-direction: row;        
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;           
+  padding-bottom: 10px;
+  margin-top: 20px;
+  scrollbar-width: thin;      
+  scroll-snap-type: x mandatory;
+  flex-wrap: wrap;            /* agar bisa turun kebawah di layar kecil */
+  justify-content: center;
+}
+
+.schedule-container::-webkit-scrollbar {
+  height: 8px;
+}
+.schedule-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+.schedule-container::-webkit-scrollbar-thumb {
+  background: #ffd369;
+  border-radius: 8px;
+}
+
+/* Box Hari */
+.day-table {
+  min-width: 280px;           
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;             
+  scroll-snap-align: start;
+}
+.day-table:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(255, 211, 105, 0.4);
+}
+.day-table h3 {
+  text-align: center;
+  margin: 12px 0;
+  color: #ffd369;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Tabel Harian */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.03);
+}
+td {
+  padding: 8px 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+td:first-child {
+  color: #ffd369;
+  font-weight: 600;
+}
+td:last-child {
+  color: #ddd;
+}
+
+/* Highlight Kegiatan Aktif */
+.active-cell {
+  background: rgba(255, 211, 105, 0.2);
+  color: #ffd369;
+  font-weight: bold;
+  animation: pulse 1.5s infinite;
+  border-radius: 6px;
+}
+@keyframes pulse {
+  0% { box-shadow: inset 0 0 5px rgba(255, 211, 105, 0.6); }
+  100% { box-shadow: inset 0 0 18px rgba(255, 211, 105, 1); }
+}
+
+/* ============================= */
+/* 🔹 Responsif Bertahap */
+/* ============================= */
+
+/* Tablet landscape */
+@media (max-width: 1024px) {
+  #digital-clock {
+    font-size: 2.4rem;
+  }
+  .current-card {
+    width: 90%;
+  }
+  .day-table {
+    min-width: 260px;
+  }
+}
+
+/* Tablet potrait & HP besar */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  #digital-clock {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+  .current-card {
+    width: 95%;
+    font-size: 0.9rem;
+    padding: 15px;
+  }
+  .day-table {
+    min-width: 240px;
+    max-width: 260px;
+  }
+  table {
+    font-size: 0.8rem;
+  }
+  td {
+    padding: 6px 8px;
+  }
+}
+
+/* HP kecil (≤480px) */
+@media (max-width: 480px) {
+  #digital-clock {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+  .current-card {
+    font-size: 0.8rem;
+    padding: 12px;
+  }
+  .day-table {
+    min-width: 200px;
+    max-width: 220px;
+  }
+  table {
+    font-size: 0.75rem;
+  }
+  td {
+    padding: 5px 6px;
+  }
+}
