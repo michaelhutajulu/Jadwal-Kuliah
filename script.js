@@ -16,9 +16,9 @@ updateDigitalClock();
 /* ---------- JADWAL DATA ---------- */
 const activities = {
   "Senin": {
-    5: "Bangun dan Ibadah", 6: "-", 7: "-", 8: "-", 9: "-", 10: "-",
-    11: "-", 12: "-", 13: "-", 14: "-", 15: "-", 16: "-",
-    17: "-", 18: "-", 19: "-", 20: "-", 21: "-", 22: "-", 23: "-"
+    5: "Bangun dan Ibadah", 6: "Mandi dan persiapan kuliah", 7: "Sarapan", 8: "Mata Kuliah Login", 9: "Mata Kuliah PBO ", 10: "Mata Kuliah Alstrudat",
+    11: "Mata Kuliah PAP", 12: "Makan Siang", 13: "Mata Kuliah Certan", 14: "Mata Kuliah SBD", 15: "Mata Kuliah Jarkom", 16: "Mata Kuliah Bahasa Inggris",
+    17: "Kembali ke Asrama", 18: "Mandi", 19: "Makan Malam", 20: "Belajar", 21: "Belajar", 22: "Belajar", 23: "Ibadah dan Tidur"
   },
   "Selasa": {
     5: "-", 6: "-", 7: "-", 8: "-", 9: "-", 10: "-",
