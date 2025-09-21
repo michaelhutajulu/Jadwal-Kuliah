@@ -214,12 +214,16 @@ days.forEach(day => {
   scheduleWrapper.appendChild(dayBox);
 });
 
-/* ---------- HIGHLIGHT KEGIATAN SEKARANG ---------- */
 function highlightCurrentActivity() {
   const now = new Date();
   const currentDayIndex = (now.getDay() + 6) % 7; // Senin=0 ... Minggu=6
   const currentDayName = days[currentDayIndex];
-  const currentHour = now.getHours();
+  const currentHour = now.getHours(); // tetap dipakai untuk highlight
+
+  // Ambil tanggal lengkap
+  const currentDate = now.getDate();
+  const currentMonth = now.getMonth() + 1; // bulan mulai dari 0
+  const currentYear = now.getFullYear();
 
   const allTables = document.querySelectorAll(".day-table tbody");
   allTables.forEach(tbody => {
@@ -236,17 +240,19 @@ function highlightCurrentActivity() {
       if (activeCell) {
         activeCell.classList.add("active-cell");
 
-        // Update card
-        const activity = activities[currentDayName][currentHour] !== "-" 
-          ? activities[currentDayName][currentHour] 
-          : "Tidak ada kegiatan";
+        // Update card → sekarang tampilkan juga tanggal
+        const activity = activities[currentDayName]?.[currentHour] ?? "Tidak ada kegiatan";
         document.getElementById("current-card").innerHTML = `
           <h2>${activity}</h2>
-          <p>${now.toLocaleString("id-ID", { weekday: "long", hour: "2-digit", minute: "2-digit" })}</p>
+          <p>
+            ${now.toLocaleString("id-ID", { weekday: "long", hour: "2-digit", minute: "2-digit" })}<br>
+            ${now.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
+          </p>
         `;
       }
     }
   }
 }
+
 setInterval(highlightCurrentActivity, 60000);
 highlightCurrentActivity();
