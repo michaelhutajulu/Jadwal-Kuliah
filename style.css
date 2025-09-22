@@ -13,13 +13,129 @@ body {
 }
 
 /* ============================= */
-/* 🔹 Header (Jam Digital + Nama) */
+/* 🔹 Header (Jam Digital + Nama + Toggle) */
 /* ============================= */
 .header {
-  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   margin-bottom: 20px;
 }
 
+.theme-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+/* Tombol Toggle Tema */
+#theme-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #ffd369;
+  color: #ffd369;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+#theme-toggle:hover {
+  background: #ffd369;
+  color: #1a1a1a;
+}
+
+/* ============================= */
+/* 🔹 Mode Light (Adem & Jelas) */
+/* ============================= */
+body.light-mode {
+  background: linear-gradient(135deg, #dce2ec, #cbd5e1); /* soft pastel */
+  color: #1a1a1a;
+}
+
+body.light-mode .clock {
+  border-color: #444;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
+body.light-mode #digital-clock {
+  color: #222;
+  text-shadow: none;
+}
+body.light-mode #user-name {
+  color: #333;
+}
+body.light-mode .current-card {
+  background: rgba(245, 247, 250, 0.9);
+  color: #222;
+}
+body.light-mode .current-card h2 {
+  color: #333;
+}
+body.light-mode .day-table {
+  background: #f0f4f8; /* abu pastel */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+body.light-mode thead {
+  background: #d0d7e2; /* header abu kebiruan */
+}
+body.light-mode th {
+  color: #222;
+}
+body.light-mode td {
+  color: #333;
+  background: rgba(255,255,255,0.8);
+}
+body.light-mode tbody tr:nth-child(odd) {
+  background: #f7f9fc;
+}
+body.light-mode table th, 
+body.light-mode table td {
+  border-bottom: 1px solid #ddd;
+}
+body.light-mode .day-tabs button {
+  border-color: #444;
+  color: #222;
+}
+body.light-mode .day-tabs button.active {
+  background: #444;
+  color: #fff;
+}
+/* Search result di mode terang */
+body.light-mode .search-results {
+  background: #f0f4f8;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+body.light-mode .search-results p {
+  background: #e0e6ed;
+  color: #222;
+}
+body.light-mode .search-results p span {
+  color: #000;
+}
+/* Search box input lebih jelas */
+body.light-mode .search-box input {
+  background: #fff;
+  color: #222;
+  border: 2px solid #bbb;
+}
+body.light-mode .search-box input:focus {
+  border-color: #ffd369;
+  box-shadow: 0 0 8px rgba(255, 211, 105, 0.6);
+}
+/* Highlight aktif lebih tegas */
+body.light-mode .active-row {
+  background: #ffe9a7 !important;
+  color: #000 !important;
+  font-weight: bold;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.15);
+}
+
+/* ============================= */
+/* 🔹 Jam Digital + Nama */
+/* ============================= */
 .clock {
   background: rgba(255, 255, 255, 0.05);
   padding: 25px 50px;
@@ -152,12 +268,65 @@ tbody tr:hover {
   background: rgba(255,255,255,0.08);
 }
 
-/* 🔹 Highlight Kegiatan Aktif */
+/* 🔹 Highlight Kegiatan Aktif (Dark Mode) */
 .active-row {
   background: rgba(255, 211, 105, 0.15) !important;
   color: #ffd369;
   font-weight: bold;
   box-shadow: inset 0 0 10px rgba(255,211,105,0.6);
+}
+
+/* Kotak Search */
+.search-box {
+  margin: 15px 0;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+.search-box input {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 2px solid #ffd369;
+  font-size: 1rem;
+  outline: none;
+  background: rgba(255,255,255,0.1);
+  color: #f2f2f2;
+  transition: all 0.3s ease;
+}
+.search-box input::placeholder {
+  color: #ccc;
+}
+.search-box input:focus {
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 0 10px rgba(255, 211, 105, 0.5);
+}
+
+/* Kotak hasil pencarian */
+.search-results {
+  margin-top: 15px;
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.search-results p {
+  margin: 6px 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255, 211, 105, 0.1);
+  color: #ffd369;
+}
+
+.search-results p span {
+  color: #fff;
+  font-weight: 600;
 }
 
 /* ============================= */

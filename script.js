@@ -251,6 +251,55 @@ function updateActiveTab(activeIndex) {
   });
 }
 
+/* ---------- TOGGLE DARK/LIGHT MODE ---------- */
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
+
+// cek preferensi sebelumnya
+if (localStorage.getItem("theme") === "light") {
+  body.classList.add("light-mode");
+  themeToggle.textContent = "☀️";
+}
+
+// klik toggle
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("light-mode");
+  const isLight = body.classList.contains("light-mode");
+  themeToggle.textContent = isLight ? "☀️" : "🌙";
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+});
+
+/* ---------- FITUR PENCARIAN LIST ---------- */
+const searchInput = document.getElementById("search-input");
+const searchResults = document.getElementById("search-results");
+
+searchInput.addEventListener("input", function () {
+  const query = this.value.trim().toLowerCase();
+  searchResults.innerHTML = ""; // reset hasil
+
+  if (query.length === 0) return;
+
+  let found = false;
+
+  Object.keys(activities).forEach(day => {
+    for (let hour in activities[day]) {
+      const text = activities[day][hour];
+      if (text.toLowerCase().includes(query)) {
+        found = true;
+        const item = document.createElement("p");
+        item.innerHTML = `✅ <span>${day}</span> - ${hour}:00 → ${text}`;
+        searchResults.appendChild(item);
+      }
+    }
+  });
+
+  if (!found) {
+    searchResults.innerHTML = "<p>❌ Tidak ditemukan</p>";
+  }
+});
+
+
+
 /* ---------- DEFAULT: HARI INI ---------- */
 const todayIndex = (new Date().getDay() + 6) % 7;
 renderDaySchedule(todayIndex);

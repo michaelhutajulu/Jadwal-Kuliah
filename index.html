@@ -8,18 +8,31 @@
 </head>
 <body>
   <!-- Header: Jam Digital + Nama -->
-  <header class="header">
-    <div class="clock">
-      <span id="digital-clock">00:00:00</span>
-      <p id="user-name">Michael Hutajulu</p>
-    </div>
-  </header>
+<header class="header">
+  <div class="clock">
+    <span id="digital-clock">00:00:00</span>
+    <p id="user-name">Michael Hutajulu</p>
+  </div>
+  <div class="theme-btn">
+    <button id="theme-toggle">🌙</button>
+  </div>
+</header>
 
   <!-- Card Kegiatan Aktif -->
   <div class="current-card" id="current-card">
     <h2>Memuat kegiatan...</h2>
     <p id="current-time"></p>
   </div>
+
+  <!-- Kotak Search Jadwal -->
+<div class="search-box">
+  <input type="text" id="search-input" placeholder="Cari jadwal...">
+</div>
+
+<!-- Hasil Pencarian -->
+<div class="search-results" id="search-results"></div>
+
+  
 
   <!-- Navigasi Hari -->
   <nav class="day-tabs" id="day-tabs"></nav>
