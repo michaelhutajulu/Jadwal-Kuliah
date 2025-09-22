@@ -1,15 +1,13 @@
 /* ---------- JAM DIGITAL ---------- */
 function updateDigitalClock() {
   const now = new Date();
-
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
   const seconds = String(now.getSeconds()).padStart(2, "0");
 
-  document.getElementById("digital-clock").textContent = 
+  document.getElementById("digital-clock").textContent =
     `${hours}:${minutes}:${seconds}`;
 }
-
 setInterval(updateDigitalClock, 1000);
 updateDigitalClock();
 
@@ -164,19 +162,27 @@ const activities = {
   }
 };
 
-
-
+/* ---------- KONFIG ---------- */
 const startHour = 5;
 const endHour = 23;
-const scheduleWrapper = document.getElementById("schedule-container");
-
-/* ---------- BUAT TABEL PER HARI ---------- */
 const days = ["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"];
-days.forEach(day => {
-  const dayBox = document.createElement("div");
-  dayBox.classList.add("day-table");
+const scheduleWrapper = document.getElementById("schedule-container");
+const dayTabs = document.getElementById("day-tabs");
 
-  const dayTable = document.createElement("table");
+/* ---------- BUAT TAB HARI ---------- */
+days.forEach((day, index) => {
+  const btn = document.createElement("button");
+  btn.textContent = day;
+  btn.onclick = () => renderDaySchedule(index);
+  dayTabs.appendChild(btn);
+});
+
+/* ---------- RENDER TABEL 1 HARI ---------- */
+function renderDaySchedule(dayIndex) {
+  const day = days[dayIndex];
+  scheduleWrapper.innerHTML = ""; // clear container
+
+  const table = document.createElement("table");
 
   // Header
   const thead = document.createElement("thead");
@@ -187,72 +193,72 @@ days.forEach(day => {
       <th>${day}</th>
     </tr>
   `;
-  dayTable.appendChild(thead);
+  table.appendChild(thead);
 
   // Body
   const tbody = document.createElement("tbody");
   let no = 1;
   for (let hour = startHour; hour <= endHour; hour++) {
     const row = document.createElement("tr");
-
-    const noCell = document.createElement("td");
-    noCell.textContent = no++;
-    row.appendChild(noCell);
-
-    const timeCell = document.createElement("td");
-    timeCell.textContent = `${hour}:00 - ${hour + 1}:00`;
-    row.appendChild(timeCell);
-
-    const activityCell = document.createElement("td");
-    activityCell.textContent = activities[day][hour] || "-";
-    row.appendChild(activityCell);
-
+    row.innerHTML = `
+      <td>${no++}</td>
+      <td>${hour}:00 - ${hour+1}:00</td>
+      <td>${activities[day][hour] || "-"}</td>
+    `;
     tbody.appendChild(row);
   }
-  dayTable.appendChild(tbody);
-  dayBox.appendChild(dayTable);
-  scheduleWrapper.appendChild(dayBox);
-});
+  table.appendChild(tbody);
+  scheduleWrapper.appendChild(table);
 
-function highlightCurrentActivity() {
+  highlightCurrentActivity(dayIndex);
+  updateActiveTab(dayIndex);
+}
+
+/* ---------- HIGHLIGHT AKTIVITAS SEKARANG ---------- */
+function highlightCurrentActivity(dayIndex) {
   const now = new Date();
   const currentDayIndex = (now.getDay() + 6) % 7; // Senin=0 ... Minggu=6
-  const currentDayName = days[currentDayIndex];
-  const currentHour = now.getHours(); // tetap dipakai untuk highlight
+  const currentHour = now.getHours();
+  const day = days[dayIndex];
 
-  // Ambil tanggal lengkap
-  const currentDate = now.getDate();
-  const currentMonth = now.getMonth() + 1; // bulan mulai dari 0
-  const currentYear = now.getFullYear();
+  // Reset row
+  scheduleWrapper.querySelectorAll("tr").forEach(r => r.classList.remove("active-row"));
 
-  const allTables = document.querySelectorAll(".day-table tbody");
-  allTables.forEach(tbody => {
-    tbody.querySelectorAll("td").forEach(c => c.classList.remove("active-cell"));
-  });
-
-  if (currentHour >= startHour && currentHour <= endHour) {
-    const todayTable = allTables[currentDayIndex];
+  if (dayIndex === currentDayIndex && currentHour >= startHour && currentHour <= endHour) {
+    const rows = scheduleWrapper.querySelectorAll("tbody tr");
     const rowIndex = currentHour - startHour;
-    const activeRow = todayTable?.querySelectorAll("tr")[rowIndex];
-
+    const activeRow = rows[rowIndex];
     if (activeRow) {
-      const activeCell = activeRow.querySelectorAll("td")[2];
-      if (activeCell) {
-        activeCell.classList.add("active-cell");
+      activeRow.classList.add("active-row");
 
-        // Update card → sekarang tampilkan juga tanggal
-        const activity = activities[currentDayName]?.[currentHour] ?? "Tidak ada kegiatan";
-        document.getElementById("current-card").innerHTML = `
-          <h2>${activity}</h2>
-          <p>
-            ${now.toLocaleString("id-ID", { weekday: "long", hour: "2-digit", minute: "2-digit" })}<br>
-            ${now.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
-          </p>
-        `;
-      }
+      const activity = activities[day]?.[currentHour] ?? "Tidak ada kegiatan";
+      document.getElementById("current-card").innerHTML = `
+        <h2>${activity}</h2>
+        <p>
+          ${now.toLocaleString("id-ID", { weekday: "long", hour: "2-digit", minute: "2-digit" })}<br>
+          ${now.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
+        </p>
+      `;
     }
   }
 }
 
-setInterval(highlightCurrentActivity, 60000);
-highlightCurrentActivity();
+/* ---------- UPDATE TAB AKTIF ---------- */
+function updateActiveTab(activeIndex) {
+  const buttons = dayTabs.querySelectorAll("button");
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle("active", idx === activeIndex);
+  });
+}
+
+/* ---------- DEFAULT: HARI INI ---------- */
+const todayIndex = (new Date().getDay() + 6) % 7;
+renderDaySchedule(todayIndex);
+
+/* ---------- UPDATE HIGHLIGHT PER MENIT ---------- */
+setInterval(() => {
+  const activeTab = [...dayTabs.querySelectorAll("button")].findIndex(btn => btn.classList.contains("active"));
+  if (activeTab >= 0) {
+    highlightCurrentActivity(activeTab);
+  }
+}, 60000);
