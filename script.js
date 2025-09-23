@@ -212,6 +212,9 @@ function renderDaySchedule(dayIndex) {
 
   highlightCurrentActivity(dayIndex);
   updateActiveTab(dayIndex);
+
+  // 🔹 toast saat ganti hari
+  showToast(`Jadwal ${day} ditampilkan 📅`);
 }
 
 /* ---------- HIGHLIGHT AKTIVITAS SEKARANG ---------- */
@@ -259,14 +262,19 @@ const body = document.body;
 if (localStorage.getItem("theme") === "light") {
   body.classList.add("light-mode");
   themeToggle.textContent = "☀️";
+} else {
+  themeToggle.textContent = "🌙";
 }
 
-// klik toggle
+// klik toggle -> gabung dengan toast
 themeToggle.addEventListener("click", () => {
   body.classList.toggle("light-mode");
   const isLight = body.classList.contains("light-mode");
   themeToggle.textContent = isLight ? "☀️" : "🌙";
   localStorage.setItem("theme", isLight ? "light" : "dark");
+
+  // 🔹 Tampilkan toast
+  showToast(isLight ? "Tema terang aktif 🌞" : "Tema gelap aktif 🌙");
 });
 
 /* ---------- FITUR PENCARIAN LIST ---------- */
@@ -297,6 +305,48 @@ searchInput.addEventListener("input", function () {
     searchResults.innerHTML = "<p>❌ Tidak ditemukan</p>";
   }
 });
+
+/* ---------- TOAST FUNCTION ---------- */
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3500); // hilang setelah 3 detik
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const progressBar = document.getElementById("day-progress");
+
+  function updateProgress() {
+    const now = new Date();
+    const currentHour = now.getHours() + now.getMinutes() / 60;
+
+    // Misal range kegiatan harian jam 07.00 - 18.00
+    const startDay = 5;  
+    const endDay = 23;   
+    let percent;
+
+    if (currentHour < startDay) {
+      percent = 0;
+    } else if (currentHour > endDay) {
+      percent = 100;
+    } else {
+      percent = ((currentHour - startDay) / (endDay - startDay)) * 100;
+    }
+
+    progressBar.style.width = percent + "%";
+    progressBar.innerText = Math.floor(percent) + "%";
+  }
+
+  // Update saat load + tiap menit
+  updateProgress();
+  setInterval(updateProgress, 60000);
+});
+
 
 
 

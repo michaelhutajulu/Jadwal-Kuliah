@@ -10,6 +10,10 @@ body {
   min-height: 100vh;
   box-sizing: border-box;
   overflow-x: hidden;
+
+  /* 🔹 Animasi saat halaman load */
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
 }
 
 /* ============================= */
@@ -39,11 +43,12 @@ body {
   border-radius: 8px;
   cursor: pointer;
   font-size: 1.2rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, transform 0.2s ease;
 }
 #theme-toggle:hover {
   background: #ffd369;
   color: #1a1a1a;
+  transform: scale(1.05);
 }
 
 /* ============================= */
@@ -52,6 +57,9 @@ body {
 body.light-mode {
   background: linear-gradient(135deg, #dce2ec, #cbd5e1); /* soft pastel */
   color: #1a1a1a;
+
+  /* 🔹 Transisi halus ganti tema */
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 body.light-mode .clock {
@@ -202,15 +210,17 @@ body.light-mode .active-row {
   padding: 8px 16px;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, transform 0.2s ease;
 }
 .day-tabs button.active {
   background: #ffd369;
   color: #1a1a1a;
   font-weight: bold;
+  transform: scale(1.05);
 }
 .day-tabs button:hover {
   background: rgba(255, 211, 105, 0.2);
+  transform: scale(1.05);
 }
 
 /* ============================= */
@@ -220,20 +230,16 @@ body.light-mode .active-row {
   width: 100%;
   max-width: 800px;
   margin-top: 10px;
+  overflow-x: auto; /* 🔹 Mobile UX: scroll horizontal */
 }
 
-.day-table {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.35);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Scroll halus di mobile */
+.schedule-container::-webkit-scrollbar {
+  height: 6px;
 }
-.day-table:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 25px rgba(255, 211, 105, 0.4);
+.schedule-container::-webkit-scrollbar-thumb {
+  background: #ffd369;
+  border-radius: 4px;
 }
 
 /* ============================= */
@@ -243,6 +249,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
+  min-width: 480px; /* 🔹 Biar tetap readable di scroll */
 }
 thead {
   position: sticky;
@@ -360,6 +367,10 @@ tbody tr:hover {
   table {
     font-size: 0.85rem;
   }
+  #theme-toggle {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -380,4 +391,97 @@ tbody tr:hover {
   th, td {
     padding: 6px;
   }
+  #theme-toggle {
+    top: 5px;
+    right: 10px;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+  }
 }
+
+/* ============================= */
+/* 🔹 Animasi Tambahan */
+/* ============================= */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+
+/* ============================= */
+/* 🔔 Toast Notification */
+/* ============================= */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  min-width: 220px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: rgba(255, 211, 105, 0.95);
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 2000;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progress Timeline Harian */
+.progress-container {
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px auto;
+  height: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  backdrop-filter: blur(6px);
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ffd369, #ff9f1c);
+  color: #1a1a1a;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 24px;
+  transition: width 0.6s ease;
+}
+
+/* Mode terang */
+body.light-mode .progress-container {
+  background: #e4eaf2;
+}
+body.light-mode .progress-bar {
+  color: #000;
+}
+
+/* Label Progress */
+.progress-wrapper {
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+.progress-label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #f1f1f1;
+  letter-spacing: 0.5px;
+}
+
+/* Mode terang */
+body.light-mode .progress-label {
+  color: #222;
+}
+

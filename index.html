@@ -39,8 +39,18 @@
 
   <!-- Container Jadwal Harian -->
   <main class="schedule-container">
+<div class="progress-wrapper">
+  <p class="progress-label">Progress Hari Ini</p>
+  <div class="progress-container">
+    <div id="day-progress" class="progress-bar">0%</div>
+  </div>
+</div>
+
     <div class="day-table" id="schedule-container"></div>
   </main>
+
+  <div id="toast" class="toast"></div>
+
 
   <script src="script.js"></script>
 </body>
