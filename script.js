@@ -361,3 +361,55 @@ setInterval(() => {
     highlightCurrentActivity(activeTab);
   }
 }, 60000);
+
+/* ======================== */
+/* 🔹 Swipe untuk ganti hari */
+/* ======================== */
+let startX = 0;
+let endX = 0;
+
+document.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", e => {
+  endX = e.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const diffX = endX - startX;
+
+  if (Math.abs(diffX) > 80) { // minimal jarak swipe
+    const activeBtn = document.querySelector(".day-tabs button.active");
+    const buttons = Array.from(document.querySelectorAll(".day-tabs button"));
+    let index = buttons.indexOf(activeBtn);
+
+    if (diffX < 0 && index < buttons.length - 1) {
+      // geser kiri → hari berikutnya
+      buttons[index + 1].click();
+    } else if (diffX > 0 && index > 0) {
+      // geser kanan → hari sebelumnya
+      buttons[index - 1].click();
+    }
+  }
+}
+
+/* ======================== */
+/* 🔹 Cuaca Dummy (sementara) */
+/* ======================== */
+function loadWeather() {
+  const weatherBox = document.getElementById("weather-widget");
+
+  // Dummy data
+  const dummyWeather = {
+    kondisi: "☀️ Cerah",
+    suhu: "28°C"
+  };
+
+  weatherBox.innerHTML = `
+    <p>${dummyWeather.kondisi} | Suhu: ${dummyWeather.suhu}</p>
+  `;
+}
+
+loadWeather();
