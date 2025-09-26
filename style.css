@@ -230,16 +230,6 @@ body.light-mode .active-row {
   width: 100%;
   max-width: 800px;
   margin-top: 10px;
-  overflow-x: auto; /* 🔹 Mobile UX: scroll horizontal */
-}
-
-/* Scroll halus di mobile */
-.schedule-container::-webkit-scrollbar {
-  height: 6px;
-}
-.schedule-container::-webkit-scrollbar-thumb {
-  background: #ffd369;
-  border-radius: 4px;
 }
 
 /* ============================= */
@@ -247,9 +237,9 @@ body.light-mode .active-row {
 /* ============================= */
 table {
   width: 100%;
+  table-layout: fixed; /* 🔹 Kolom pas layar */
   border-collapse: collapse;
   font-size: 0.95rem;
-  min-width: 480px; /* 🔹 Biar tetap readable di scroll */
 }
 thead {
   position: sticky;
@@ -260,6 +250,8 @@ th, td {
   padding: 10px;
   text-align: center;
   border-bottom: 1px solid rgba(255,255,255,0.1);
+  white-space: normal;
+  word-break: break-word; /* 🔹 Agar teks panjang turun ke bawah */
 }
 tbody tr:nth-child(odd) {
   background: rgba(255, 255, 255, 0.03);
@@ -367,6 +359,9 @@ tbody tr:hover {
   table {
     font-size: 0.85rem;
   }
+  th, td {
+    padding: 8px;
+  }
   #theme-toggle {
     font-size: 1rem;
     padding: 5px 10px;
@@ -389,7 +384,7 @@ tbody tr:hover {
     font-size: 0.75rem;
   }
   th, td {
-    padding: 6px;
+    padding: 6px 4px;
   }
   #theme-toggle {
     top: 5px;

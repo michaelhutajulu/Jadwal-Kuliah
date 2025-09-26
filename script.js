@@ -369,13 +369,10 @@ let startX = 0;
 let endX = 0;
 
 document.addEventListener("touchstart", e => {
-  // Cek kalau swipe berasal dari dalam tabel → abaikan
-  if (e.target.closest(".day-table")) return;
   startX = e.touches[0].clientX;
 });
 
 document.addEventListener("touchend", e => {
-  if (e.target.closest(".day-table")) return;
   endX = e.changedTouches[0].clientX;
   handleSwipe();
 });
