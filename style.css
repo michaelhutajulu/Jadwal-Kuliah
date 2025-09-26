@@ -485,3 +485,24 @@ body.light-mode .progress-label {
   color: #222;
 }
 
+/* Widget Cuaca */
+.weather-widget {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #ffd369;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-align: center;
+  color: #ffd369;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(255, 211, 105, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+body.light-mode .weather-widget {
+  background: #f0f4f8;
+  border: 1px solid #ccc;
+  color: #222;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
