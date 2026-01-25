@@ -11,21 +11,21 @@ function updateDigitalClock() {
 setInterval(updateDigitalClock, 1000);
 updateDigitalClock();
 
-/* ---------- JADWAL DATA ---------- */
+/* ---------- JADWAL DATA SEMESTER 4 ---------- */
 const activities = {
   "Senin": {
     5: "Bangun, Ibadah dan Mandi",
     6: "Berangkat ke kampus",
     7: "Sarapan",
-    8: "LOGIN (T 511 - AMP)",
-    9: "PBO (T 511 - CDN)",
-    10: "ALSTRUDAT (T 527 - TAP)",
-    11: "PAP (T 511 - RIS)",
+    8: "PROBSTAT (T 527 - AMP)",
+    9: "PROBSTAT (T 527 - AMP)",
+    10: "Waktu Kosong",
+    11: "Waktu Kosong",
     12: "Makan Siang",
-    13: "CERTAN (T 511 - OPH)",
-    14: "SBD (T 516 - ADS)",
-    15: "JARKOM (T 516 - ESS)",
-    16: "ING II (T 516 - RMM)",
+    13: "Waktu Kosong",
+    14: "PPL (T 511 - AMS)",
+    15: "Waktu Kosong",
+    16: "Waktu Kosong",
     17: "Balik Asrama dan persiapan mandi",
     18: "Berangkat ke kampus",
     19: "Makan Malam",
@@ -38,15 +38,15 @@ const activities = {
     5: "Bangun, Ibadah dan Mandi",
     6: "Berangkat ke kampus",
     7: "Sarapan",
-    8: "Waktu Kosong",
+    8: "TEKNO (T 511 - RIS)",
     9: "Waktu Kosong",
-    10: "ALSTRUDAT (P 527 - TAP)",
-    11: "ALSTRUDAT (P 527 - TAP)",
+    10: "PA II (T 517 - CDN)",
+    11: "PASTI (T 511 - RCH)",
     12: "Makan Siang",
-    13: "CERTAN (P 527 - OPH)",
-    14: "CERTAN (P 527 - OPH)",
-    15: "PAP (P 517 - RIS)",
-    16: "PAP (P 517 - RIS)",
+    13: "PROBSTAT (P 527 - AMP)",
+    14: "PROBSTAT (P 527 - AMP)",
+    15: "PAM (T 516 - ADS)",
+    16: "Waktu Kosong",
     17: "Balik Asrama dan persiapan mandi",
     18: "Berangkat ke kampus",
     19: "Makan Malam",
@@ -59,15 +59,15 @@ const activities = {
     5: "Bangun, Ibadah dan Mandi",
     6: "Berangkat ke kampus",
     7: "Sarapan",
-    8: "ALSTRUDAT (P 517 - TAP)",
-    9: "ALSTRUDAT (P 517 - TAP)",
-    10: "PBO (P 527 - CDN)",
-    11: "PBO (P 527 - CDN)",
+    8: "PASTI (P 527 - RCH)",
+    9: "PASTI (P 527 - RCH)",
+    10: "PASTI (P 527 - RCH)",
+    11: "PASTI (P 527 - RCH)",
     12: "Makan Siang",
-    13: "SBD (P 511 - ADS)",
-    14: "SBD (P 511 - ADS)",
-    15: "Waktu Kosong",
-    16: "Waktu Kosong",
+    13: "TEKNO (P 527 - RIS)",
+    14: "TEKNO (P 527 - RIS)",
+    15: "TEKNO (P 527 - RIS)",
+    16: "TEKNO (P 527 - RIS)",
     17: "Balik Asrama dan persiapan mandi",
     18: "Berangkat ke kampus",
     19: "Makan Malam",
@@ -80,15 +80,15 @@ const activities = {
     5: "Bangun, Ibadah dan Mandi",
     6: "Berangkat ke kampus",
     7: "Sarapan",
-    8: "LOGIN (P 527 - AMP)",
-    9: "Review materi LOGIN",
-    10: "Waktu Kosong",
-    11: "Waktu Kosong",
+    8: "PAM (P 527 - ADS)",
+    9: "PAM (P 527 - ADS)",
+    10: "PAM (P 527 - ADS)",
+    11: "PAM (P 527 - ADS)",
     12: "Makan Siang",
-    13: "PAP (P 516 - RIS)",
-    14: "PAP (P 516 - RIS)",
-    15: "SBD (P 517 - ADS)",
-    16: "SBD (P 517 - ADS)",
+    13: "PA II (P 527 - CDN)",
+    14: "PA II (P 527 - CDN)",
+    15: "PA II (P 527 - CDN)",
+    16: "PA II (P 527 - CDN)",
     17: "Balik Asrama dan persiapan mandi",
     18: "Berangkat ke kampus",
     19: "Makan Malam",
@@ -101,18 +101,18 @@ const activities = {
     5: "Bangun, Ibadah dan Mandi",
     6: "Berangkat ke kampus",
     7: "Sarapan",
-    8: "JARKOM (P 517 - ESS)",
-    9: "JARKOM (P 517 - ESS)",
-    10: "Waktu Kosong",
-    11: "Waktu Kosong",
+    8: "PPL (P 527 - AMS)",
+    9: "PPL (P 527 - AMS)",
+    10: "PPL (P 527 - AMS)",
+    11: "PPL (P 527 - AMS)",
     12: "Makan Siang",
-    13: "ING II (P 516 - RMM)",
-    14: "ING II (P 516 - RMM)",
-    15: "PBO (P 516 - CDN)",
-    16: "PBO (P 516 - CDN)",
+    13: "Waktu Kosong",
+    14: "Waktu Kosong",
+    15: "PANCASILA (T AUD - APT)",
+    16: "PANCASILA (T AUD - APT)",
     17: "Balik Asrama dan persiapan mandi serta Loundry",
     18: "Persiapan IB jika IB",
-    19: "Belajar ulang JARKOM",
+    19: "Belajar ulang PROBSTAT",
     20: "Game (max 1 jam)",
     21: "Persiapan tugas minggu depan",
     22: "Ibadah",
@@ -123,14 +123,14 @@ const activities = {
     6: "Olahraga ringan",
     7: "Sarapan",
     8: "Review materi minggu ini",
-    9: "Kerjakan tugas besar (PBO/SBD)",
+    9: "Kerjakan tugas besar (PPL/PASTI)",
     10: "Kerjakan laporan praktikum",
     11: "Game / hiburan",
     12: "Makan Siang",
-    13: "Belajar Certan",
+    13: "Belajar PROBSTAT",
     14: "Diskusi bareng teman",
     15: "Game / hiburan",
-    16: "Belajar Jarkom",
+    16: "Belajar TEKNO",
     17: "Persiapan mandi",
     18: "Jalan / refreshing",
     19: "Makan Malam",
@@ -148,7 +148,7 @@ const activities = {
     10: "Ibadah", 
     11: "Family time / bersih kamar",
     12: "Makan Siang",
-    13: "Belajar ringan (Certan/PAP)",
+    13: "Belajar ringan (PAM/PA II)",
     14: "Game / hiburan",
     15: "Tugas kuliah / project",
     16: "Game / hiburan",
@@ -396,20 +396,91 @@ function handleSwipe() {
 }
 
 /* ======================== */
-/* 🔹 Cuaca Dummy (sementara) */
+/* 🔹 Cuaca Dinamis (Real-time) */
 /* ======================== */
-function loadWeather() {
+async function loadWeather() {
   const weatherBox = document.getElementById("weather-widget");
-
-  // Dummy data
-  const dummyWeather = {
-    kondisi: "☀️ Cerah",
-    suhu: "28°C"
-  };
-
-  weatherBox.innerHTML = `
-    <p>${dummyWeather.kondisi} | Suhu: ${dummyWeather.suhu}</p>
-  `;
+  
+  // API key dari OpenWeatherMap
+  const API_KEY = "4e99fc81eb482058c959ddae5229dd16";
+  const CITY = "Jakarta"; // Kota kamu
+  
+  try {
+    weatherBox.innerHTML = `<p>⏳ Memuat cuaca...</p>`;
+    
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric&lang=id`
+    );
+    
+    if (!response.ok) {
+      throw new Error("Gagal mengambil data cuaca");
+    }
+    
+    const data = await response.json();
+    
+    // Konversi kode cuaca ke emoji
+    const weatherIcons = {
+      "clear sky": "☀️",
+      "langit cerah": "☀️",
+      "few clouds": "🌤️",
+      "sedikit berawan": "🌤️",
+      "scattered clouds": "⛅",
+      "awan tersebar": "⛅",
+      "broken clouds": "☁️",
+      "awan pecah": "☁️",
+      "overcast clouds": "☁️",
+      "berawan": "☁️",
+      "shower rain": "🌧️",
+      "hujan lokal": "🌧️",
+      "rain": "🌧️",
+      "hujan": "🌧️",
+      "light rain": "🌦️",
+      "hujan ringan": "🌦️",
+      "moderate rain": "🌧️",
+      "hujan sedang": "🌧️",
+      "heavy intensity rain": "🌧️",
+      "hujan lebat": "🌧️",
+      "thunderstorm": "⛈️",
+      "badai petir": "⛈️",
+      "snow": "❄️",
+      "salju": "❄️",
+      "mist": "🌫️",
+      "kabut": "🌫️",
+      "haze": "🌫️",
+      "kabut asap": "🌫️",
+      "smoke": "🌫️",
+      "asap": "🌫️",
+      "dust": "🌫️",
+      "debu": "🌫️",
+      "fog": "🌫️"
+    };
+    
+    const description = data.weather[0].description.toLowerCase();
+    const icon = weatherIcons[description] || "🌈";
+    const temp = Math.round(data.main.temp);
+    const humidity = data.main.humidity;
+    const feelsLike = Math.round(data.main.feels_like);
+    
+    weatherBox.innerHTML = `
+      <p>
+        ${icon} ${description.charAt(0).toUpperCase() + description.slice(1)} | 
+        Suhu: ${temp}°C 
+        (Terasa ${feelsLike}°C) | 
+        Kelembaban: ${humidity}%
+      </p>
+    `;
+    
+  } catch (error) {
+    console.error("Error loading weather:", error);
+    // Fallback ke data dummy jika gagal
+    weatherBox.innerHTML = `
+      <p>☀️ Cerah | Suhu: 28°C (Data offline)</p>
+    `;
+  }
 }
 
+// Load cuaca saat pertama kali
 loadWeather();
+
+// Update cuaca setiap 10 menit (600000 ms = 10 menit)
+setInterval(loadWeather, 600000);
